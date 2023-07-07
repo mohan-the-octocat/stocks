@@ -1,0 +1,42 @@
+# Docker Compose File for Application Container with Docker bindings
+version: '3.8'
+
+services:
+  dev:
+    image: ghcr.io/octodemo/development-containers/javascript:base-20230620
+    command: sleep infinity
+
+    ports:
+      - "3000:3000"
+
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+
+
+  db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+
+    ports:
+      - "5432:5432"
+
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: bookstore
+
+    volumes:
+      - type: bind
+        source: ../database/init
+        target: /docker-entrypoint-initdb.d
+        consistency: consistent
+
+      - type: volume
+        source: postgres-data
+        target: /var/lib/postgresql/data
+        consistency: consistent
+
+volumes:
+  postgres-data:
