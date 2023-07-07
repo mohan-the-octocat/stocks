@@ -2,29 +2,16 @@
 version: '3.8'
 
 services:
-  dev:
-    image: php:latest
-
-    ports:
-      - "3000:3000"
-
-    volumes:
-      - type: bind
-        source: /var/run/docker.sock
-        target: /var/run/docker.sock
-
-
   db:
-    image: postgres:15-alpine
-    restart: unless-stopped
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
 
     ports:
-      - "5432:5432"
+      - "3306:3306"
 
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: bookstore
+      MYSQL_ROOT_PASSWORD: admin
 
     volumes:
       - type: bind
