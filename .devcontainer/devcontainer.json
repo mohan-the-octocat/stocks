@@ -1,11 +1,16 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "features": {
-      "ghcr.io/devcontainers/features/php:1": {
-            "version": "latest" 
-      },
-      "ghcr.io/devcontainers-contrib/features/mysql-homebrew:1": {
-            "version": "latest"
-      }
-  }
+  "name": "Stocks Template", 
+  "dockerComposeFile": "./docker-compose.yml",
+  "runServices": [
+      "mysql"
+  ],
+  "workspaceFolder": "/workspace",
+  "extensions": [
+    "ms-azuretools.vscode-docker",
+    "GitHub.copilot",
+    "GitHub.copilot-labs",
+    "ckolkman.vscode-postgres",
+    "firsttris.vscode-jest-runner",
+    "MS-SarifVSCode.sarif-viewer"
+  ]
 }
