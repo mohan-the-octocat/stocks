@@ -1,16 +1,19 @@
 {
   "name": "Stocks Template", 
   "dockerComposeFile": "./docker-compose.yml",
+  "service": "dev",
   "runServices": [
-      "mysql"
+      "db"
   ],
-  "workspaceFolder": "/workspace",
-  "extensions": [
-    "ms-azuretools.vscode-docker",
-    "GitHub.copilot",
-    "GitHub.copilot-labs",
-    "ckolkman.vscode-postgres",
-    "firsttris.vscode-jest-runner",
-    "MS-SarifVSCode.sarif-viewer"
-  ]
+"workspaceFolder": "/workspaces/stocks",
+"postCreateCommand": "bash /workspaces/stocks/.devcontainer/postCreate.sh",
+"customizations": {
+	"vscode": {
+		"extensions": [
+			"ms-azuretools.vscode-docker",
+			"formulahendry.vscode-mysql",
+			"DEVSENSE.phptools-vscode"
+		]
+	}
+}
 }
